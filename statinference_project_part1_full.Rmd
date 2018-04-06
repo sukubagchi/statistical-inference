@@ -1,13 +1,23 @@
-# Statistical Inference Course Project, Part 1: Simulation Exercises
+---
+title: 'Statistical Inference Course Project, Part 1: Simulation Exercises'
+author: "Sukanya Sen"
+date: "6th April 2018"
+output:
+  html_document: default
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+  word_document: default
+---
 
-
-
+##Overview::
 The exponential distribution can be simulated in R with `rexp(n, lambda)` where
 `lambda` $\lambda$ is the rate parameter. The mean of exponential distribution is 
 $1/\lambda$ and the standard deviation is also $1/\lambda$. For this simulation,
 we set $\lambda=0.2$. In this simulation, we investigate the distribution of
 averages of 40 numbers sampled from exponential distribution with $\lambda=0.2$.
 
+##Simulations: 
 Let's do a thousand simulated averages of 40 exponentials.
 
 ```{r}
@@ -19,6 +29,7 @@ sim <- matrix(rexp(num_sim*sample_size, rate=lambda), num_sim, sample_size)
 row_means <- rowMeans(sim)
 ```
 
+##Sample Mean versus Theoretical Mean:
 The distribution of sample means is as follows.
 
 ```{r}
@@ -39,6 +50,8 @@ lines(xfit, yfit, pch=22, col="red", lty=2)
 legend('topright', c("simulation", "theoretical"), lty=c(1,2), col=c("black", "red"))
 ```
 
+
+##Sample Variance versus Theoretical Variance:
 The distribution of sample means is centered at `r mean(row_means)`
 and the theoretical center of the distribution is $\lambda^{-1}$ = `r 1/lambda`.
 The variance of sample means is `r var(row_means)` where the theoretical variance
@@ -54,6 +67,8 @@ q-q plot below suggests the normality.
 qqnorm(row_means); qqline(row_means)
 ```
 
+
+##Distribution:
 Finally, let's evaluate the coverage of the confidence interval for
 $1/\lambda = \bar{X} \pm 1.96 \frac{S}{\sqrt{n}}$
 
